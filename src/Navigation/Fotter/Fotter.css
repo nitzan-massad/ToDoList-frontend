@@ -1,0 +1,13 @@
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 2%;
+    width: 98%;
+    background-color: transparent;
+    text-align: right;
+ }
+
+ .fotter-logout-btn{
+    border-radius: 5px;
+    background-color: rgb(238, 73, 73);
+ }

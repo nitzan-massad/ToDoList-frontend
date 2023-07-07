@@ -1,25 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from 'react'
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 
-function App() {
+import { AuthContext } from './shared/context/AuthContext'
+import { useAuth } from './shared/hooks/auth-hook'
+import LoadingSpinner from './Components/LoadingSpinner/LoadingSpinner'
+import MainNavigation from './Navigation/MainNavigation/MainNavigation'
+const ShowAllLists = React.lazy(() =>
+  import('./pages/ShowAllLists/ShowAllLists')
+)
+const Login = React.lazy(() => import('./pages/Login/Login'))
+const Fotter = React.lazy(() => import('./Navigation/Fotter/Fotter'))
+const ListView = React.lazy(() => import('./pages/ListView/ListView'))
+
+
+
+function App () {
+  const { token, login, logout, userDetails } = useAuth()
+
+  let routes
+
+  if (token) {
+    routes = (
+      <Switch>
+        <Route path='/' exact>
+          <ShowAllLists />
+        </Route>
+        <Route path='/showList' exact component={ListView} />
+        <Redirect to='/' />
+      </Switch>
+    )
+  } else {
+    routes = (
+      <Switch>
+        <Route path='/login' exact>
+          <Login />
+        </Route>
+        <Redirect to='/login' />
+      </Switch>
+    )
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: !!token,
+        token: token,
+        userFirstName: userDetails?.userFirstName,
+        userLastName: userDetails?.userLastName,
+        userId: userDetails?.userId,
+        login: login,
+        logout: logout
+      }}
+    >
+      <BrowserRouter>
+        <MainNavigation />
+        <main><Suspense fallback={<div className='center' ><LoadingSpinner/></div>}>{routes}</Suspense></main>
+        <Fotter />
+      </BrowserRouter>
+    </AuthContext.Provider>
+  )
 }
 
-export default App;
+export default App

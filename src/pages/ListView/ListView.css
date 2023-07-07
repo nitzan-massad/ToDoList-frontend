@@ -1,0 +1,18 @@
+.delete-btn__list-view{
+    position: absolute;
+    right: 0;
+    transform: translateY(-50%);
+    margin-right: 4%;
+    margin-top: 4%;
+    display: flex;
+    justify-content: center;
+
+}
+.list-view-top-bar__div{
+    display: flex;
+}
+.list-view-list-name__h1{
+    text-align: -webkit-center;
+    font-weight: bold;
+    
+}

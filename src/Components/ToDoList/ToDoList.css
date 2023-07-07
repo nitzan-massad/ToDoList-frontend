@@ -1,0 +1,17 @@
+.flexbox-container {
+    display: flex;
+    flex-direction: row;
+    /*flex-direction: row | row-reverse | column | column-reverse;*/
+    height: 84px;
+}
+.horizontal-list {
+    margin-left: 20px;
+}
+.toDoListBorder{
+    border: 0.02cm;
+    border-color: black;
+    border-style: solid;
+    border-radius: 1ch;
+    margin-top: 10px;
+    text-decoration: none
+}

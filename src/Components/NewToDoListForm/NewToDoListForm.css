@@ -1,0 +1,14 @@
+
+.place-item__modal-content {
+    padding: 5%;
+
+  }
+  
+  .place-item__modal-actions {
+    text-align: right;
+  }
+
+  .new-list-container{
+    height: 80%;
+    width: 80%;
+  }
