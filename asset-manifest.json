@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/ToDoList-frontend/static/css/main.151fab71.css",
+    "main.js": "/ToDoList-frontend/static/js/main.93c52cad.js",
+    "static/css/19.fdc4d7f0.chunk.css": "/ToDoList-frontend/static/css/19.fdc4d7f0.chunk.css",
+    "static/js/19.b4c2c123.chunk.js": "/ToDoList-frontend/static/js/19.b4c2c123.chunk.js",
+    "static/css/925.242231e1.chunk.css": "/ToDoList-frontend/static/css/925.242231e1.chunk.css",
+    "static/js/925.9c50af92.chunk.js": "/ToDoList-frontend/static/js/925.9c50af92.chunk.js",
+    "static/css/465.b6c78279.chunk.css": "/ToDoList-frontend/static/css/465.b6c78279.chunk.css",
+    "static/js/465.16cb46b3.chunk.js": "/ToDoList-frontend/static/js/465.16cb46b3.chunk.js",
+    "static/css/267.76471a18.chunk.css": "/ToDoList-frontend/static/css/267.76471a18.chunk.css",
+    "static/js/267.d625c799.chunk.js": "/ToDoList-frontend/static/js/267.d625c799.chunk.js",
+    "static/js/787.2d1e2e27.chunk.js": "/ToDoList-frontend/static/js/787.2d1e2e27.chunk.js",
+    "static/js/63.81b72f85.chunk.js": "/ToDoList-frontend/static/js/63.81b72f85.chunk.js",
+    "index.html": "/ToDoList-frontend/index.html",
+    "main.151fab71.css.map": "/ToDoList-frontend/static/css/main.151fab71.css.map",
+    "main.93c52cad.js.map": "/ToDoList-frontend/static/js/main.93c52cad.js.map",
+    "19.fdc4d7f0.chunk.css.map": "/ToDoList-frontend/static/css/19.fdc4d7f0.chunk.css.map",
+    "19.b4c2c123.chunk.js.map": "/ToDoList-frontend/static/js/19.b4c2c123.chunk.js.map",
+    "925.242231e1.chunk.css.map": "/ToDoList-frontend/static/css/925.242231e1.chunk.css.map",
+    "925.9c50af92.chunk.js.map": "/ToDoList-frontend/static/js/925.9c50af92.chunk.js.map",
+    "465.b6c78279.chunk.css.map": "/ToDoList-frontend/static/css/465.b6c78279.chunk.css.map",
+    "465.16cb46b3.chunk.js.map": "/ToDoList-frontend/static/js/465.16cb46b3.chunk.js.map",
+    "267.76471a18.chunk.css.map": "/ToDoList-frontend/static/css/267.76471a18.chunk.css.map",
+    "267.d625c799.chunk.js.map": "/ToDoList-frontend/static/js/267.d625c799.chunk.js.map",
+    "787.2d1e2e27.chunk.js.map": "/ToDoList-frontend/static/js/787.2d1e2e27.chunk.js.map",
+    "63.81b72f85.chunk.js.map": "/ToDoList-frontend/static/js/63.81b72f85.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.151fab71.css",
+    "static/js/main.93c52cad.js"
+  ]
+}

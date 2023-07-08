@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkto_do_lists=self.webpackChunkto_do_lists||[]).push([[465],{4465:function(t,o,e){e.r(o),e.d(o,{default:function(){return l}});var n=e(2791),s=e(230),u=e(184),l=function(t){var o=(0,n.useContext)(s.V);return(0,u.jsx)("div",{className:"footer",children:o.isLoggedIn&&(0,u.jsx)("button",{className:"fotter-logout-btn",onClick:o.logout,children:"Logout"})})}}}]);
+//# sourceMappingURL=465.16cb46b3.chunk.js.map
