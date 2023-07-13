@@ -1,44 +1,60 @@
-import  React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from 'react'
+import { Link } from 'react-router-dom'
 
-import MainHeader from "../MainHeader/MainHeader";  
+import MainHeader from '../MainHeader/MainHeader'
 import './MainNavigation.css'
-import NewToDoListForm from "../../Components/NewToDoListForm/NewToDoListForm";
-import { AuthContext } from "../../shared/context/AuthContext";
+import NewToDoListForm from '../../Components/NewToDoListForm/NewToDoListForm'
+import SideDrawer from '../SideDrawer/SideDrawer'
+import NavLinks from '../NavLinks/NavLinks'
+import Backdrop from '../../Components/Backdrop/Backdrop'
 
-const MainNavigation = props=> {
+import { AuthContext } from '../../shared/context/AuthContext'
 
-    const [showNewToDoListModal,setNewToDoListModal] =useState(false)
-    const openNewToDoListModal = () =>setNewToDoListModal(true)
-    const closeNewToDoListModal = () =>setNewToDoListModal(false)
-    const auth = useContext(AuthContext)
+const MainNavigation = props => {
+  const [showNewToDoListModal, setNewToDoListModal] = useState(false)
+  const [drawerIsOpen, setDrawerIsOpen] = useState(false)
+  const auth = useContext(AuthContext)
+  const openNewToDoListModal = () => setNewToDoListModal(true)
+  const closeNewToDoListModal = () => setNewToDoListModal(false)
+  const openDrawerHandler = () => setDrawerIsOpen(true)
+  const closeDrawerHandler = () => setDrawerIsOpen(false)
 
-    return (
-        <React.Fragment>
-           
-        <NewToDoListForm show={showNewToDoListModal} closeNewToDoListModal={closeNewToDoListModal}/>
-        <MainHeader >
-            <button className="main-navigation__menu-btn">
-                <span/>
-                <span/>
-                <span/>
-            </button>
-            <h1 className="main-navigation__title">
-                <Link to="/">To Do List </Link>
-            </h1>
-            <h5 style={{alignContent:"center"}}>userId: {auth.userId?.slice(0, 3)} token: {auth.token?.slice(0, 3)}</h5>
-
-            <nav>
-                ...
-            </nav>
-            {auth.isLoggedIn && <button onClick={openNewToDoListModal} className="main-navigation__new-btn">
-                New          
-            </button>}
-        </MainHeader>
-        </React.Fragment>
-    )
-
-
+  return (
+    <React.Fragment>
+      <NewToDoListForm
+        show={showNewToDoListModal}
+        closeNewToDoListModal={closeNewToDoListModal}
+      />
+      {drawerIsOpen && <Backdrop onClick={closeDrawerHandler} />}
+      <SideDrawer show={drawerIsOpen} onClick={closeDrawerHandler}>
+        <nav className='main-navigation__drawer-nav'>
+          <NavLinks />
+        </nav>
+      </SideDrawer>
+      <MainHeader>
+        <button
+          className='main-navigation__menu-btn'
+          onClick={openDrawerHandler}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+        <h1 className='main-navigation__title'>
+          <Link to='/'>To Do List </Link>
+        </h1>
+        <h5 style={{ alignContent: 'center' }}></h5>
+        {auth.isLoggedIn && (
+          <button
+            onClick={openNewToDoListModal}
+            className='main-navigation__new-btn'
+          >
+            New
+          </button>
+        )}
+      </MainHeader>
+    </React.Fragment>
+  )
 }
 
 export default MainNavigation

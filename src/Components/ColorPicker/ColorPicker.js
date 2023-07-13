@@ -28,22 +28,6 @@ const ColorPicker = props => {
     { label: 'Purple', value: 'purple' }
   ]
 
-  /*return (
-    <div className='select-container'>
-      <select
-        id='colorDropdown'
-        value={pickedColor}
-        onChange={handleColorChange}
-      >
-        {colorOptions.map(option => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-    </div>
-  )*/
-
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>

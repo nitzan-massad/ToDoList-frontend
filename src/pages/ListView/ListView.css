@@ -9,7 +9,11 @@
 
 }
 .list-view-top-bar__div{
+    padding: 0 15px;
     display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
 }
 .list-view-list-name__h1{
     text-align: -webkit-center;

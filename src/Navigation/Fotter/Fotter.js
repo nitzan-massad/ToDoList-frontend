@@ -10,9 +10,9 @@ const Fotter = props =>{
 
     return(
         <div className="footer">
-            {authContext.isLoggedIn &&
+            {/* {authContext.isLoggedIn &&
             <button className="fotter-logout-btn" onClick={authContext.logout}>Logout</button>
-            }
+            } */}
         </div>
     )
 }
