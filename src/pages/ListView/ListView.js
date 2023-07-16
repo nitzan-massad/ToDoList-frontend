@@ -14,12 +14,12 @@ import { useItemView } from '../../shared/hooks/ItemView-hook'
 
 import './ListView.css'
 
-
 const ListView = () => {
   const location = useLocation()
   const { data } = location.state
   const history = useHistory()
-  const {dispatchListData,
+  const {
+    dispatchListData,
     handleListColorChange,
     handleAddItemToList,
     handleDeleteList,
@@ -33,9 +33,7 @@ const ListView = () => {
     error,
     showConfirmModal,
     addNewItemTextRef
-  } = useItemView(data.listColor,data.items,data?.listId)
-
-
+  } = useItemView(data.listColor, data.items, data?.listId)
 
   if (listColor !== data.listColor) {
     setListColor(data.listColor)
@@ -48,8 +46,6 @@ const ListView = () => {
   const cancelDeleteHandler = () => {
     setShowConfirmModal(false)
   }
-
-
 
   return (
     <React.Fragment>
@@ -74,13 +70,13 @@ const ListView = () => {
         {isLoading && <LoadingSpinner asOverlay />}
         <h1 className='list-view-list-name__h1'>{data?.listTitle}</h1>
         <div className='list-view-top-bar__div'>
+          <IconButton aria-label='delete' onClick={showDeleteWarningHandler}>
+            <DeleteIcon />
+          </IconButton>
           <ColorPicker
             pickedAction={handleListColorChange}
             initialColorChoice={listColor}
           />
-          <IconButton aria-label='delete' onClick={showDeleteWarningHandler}>
-            <DeleteIcon />
-          </IconButton>
           <AddItemBox
             HandleAddItem={handleAddItemToList}
             textRef={addNewItemTextRef}
@@ -89,7 +85,7 @@ const ListView = () => {
         <ItemView
           itemList={listData.items}
           handleCheckUncheck={handleItemCheckOrUncheck}
-        ></ItemView>
+        />
       </div>
     </React.Fragment>
   )

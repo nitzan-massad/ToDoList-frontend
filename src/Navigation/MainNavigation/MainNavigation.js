@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import MenuIcon from '@mui/icons-material/Menu'
 
 import MainHeader from '../MainHeader/MainHeader'
 import './MainNavigation.css'
@@ -36,9 +37,7 @@ const MainNavigation = props => {
           className='main-navigation__menu-btn'
           onClick={openDrawerHandler}
         >
-          <span />
-          <span />
-          <span />
+          <MenuIcon  fontSize="large" />
         </button>
         <h1 className='main-navigation__title'>
           <Link to='/'>To Do List </Link>

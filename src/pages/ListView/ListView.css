@@ -20,3 +20,10 @@
     font-weight: bold;
     
 }
+.list-of-items-inside-listview__div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}

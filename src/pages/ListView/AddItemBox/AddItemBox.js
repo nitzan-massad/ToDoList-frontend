@@ -1,16 +1,19 @@
 import React, { useRef } from 'react'
-import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
-import Fab from '@mui/material/Fab'
-import AddIcon from '@mui/icons-material/Add'
 import Stack from '@mui/material/Stack'
 import IconButton from '@mui/material/IconButton'
 import AddShoppingCartIcon from '@mui/icons-material/Send'
 
 import './AddItemBox.css'
-import Icon from '@mui/material/Icon'
 
 export default function AddItemBox (props) {
+
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 13) { // Check if Enter key is pressed (key code 13)
+      e.preventDefault(); // Prevent the default form submission behavior
+      props.HandleAddItem();
+    }
+  };
 
   return (
     <div className='main-div-Add-item-box__div'>
@@ -21,6 +24,7 @@ export default function AddItemBox (props) {
             label='Insert New Item'
             id='insertNewItem'
             inputRef={props.textRef}
+            onKeyDown={handleKeyDown}
           />
           <IconButton
           size='large'
