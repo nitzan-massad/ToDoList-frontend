@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import MenuIcon from '@mui/icons-material/Menu'
+import Drawer from '@mui/material/Drawer';
 
 import MainHeader from '../MainHeader/MainHeader'
 import './MainNavigation.css'
 import NewToDoListForm from '../../Components/NewToDoListForm/NewToDoListForm'
-import SideDrawer from '../SideDrawer/SideDrawer'
-import NavLinks from '../NavLinks/NavLinks'
+import NavLinksSideDrwar from '../NavLinksSideDrawer/NavLinksSideDrawer'
 import Backdrop from '../../Components/Backdrop/Backdrop'
 
 import { AuthContext } from '../../shared/context/AuthContext'
@@ -20,6 +20,14 @@ const MainNavigation = props => {
   const openDrawerHandler = () => setDrawerIsOpen(true)
   const closeDrawerHandler = () => setDrawerIsOpen(false)
 
+  const toggleDrawer = (open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setDrawerIsOpen(open);
+  };
+
   return (
     <React.Fragment>
       <NewToDoListForm
@@ -27,11 +35,11 @@ const MainNavigation = props => {
         closeNewToDoListModal={closeNewToDoListModal}
       />
       {drawerIsOpen && <Backdrop onClick={closeDrawerHandler} />}
-      <SideDrawer show={drawerIsOpen} onClick={closeDrawerHandler}>
+      <Drawer open={drawerIsOpen} onClose={closeDrawerHandler}>
         <nav className='main-navigation__drawer-nav'>
-          <NavLinks />
+          <NavLinksSideDrwar toggleDrawer={toggleDrawer}  />
         </nav>
-      </SideDrawer>
+      </Drawer>
       <MainHeader>
         <button
           className='main-navigation__menu-btn'
@@ -42,7 +50,6 @@ const MainNavigation = props => {
         <h1 className='main-navigation__title'>
           <Link to='/'>To Do List </Link>
         </h1>
-        <h5 style={{ alignContent: 'center' }}></h5>
         {auth.isLoggedIn && (
           <button
             onClick={openNewToDoListModal}

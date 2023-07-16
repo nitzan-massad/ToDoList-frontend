@@ -13,7 +13,7 @@ const itemListReducer = (state, action) => {
     case 'CHECK-UNCHECK-ITEM':
       const itemsToUpdate = state.items
       const currentIndex2 = itemsToUpdate.findIndex(
-        item => item.id == action.itemId
+        item => item.id === action.itemId
       )
       itemsToUpdate[currentIndex2].isDone = action.valueToUpdate
       return {
@@ -32,7 +32,7 @@ const sortItems = (a, b)=>{
 }
 export const useItemView = (color, items,listIdntifier) => {
   const [listColor, setListColor] = useState(color)
-  const [listId, setListId] = useState(listIdntifier)
+  const [listId] = useState(listIdntifier)
   const { isLoading, error, sendRequest, clearError } = useHtppClient()
   const [showConfirmModal, setShowConfirmModal] = useState(false)
   const history = useHistory()
@@ -93,7 +93,7 @@ export const useItemView = (color, items,listIdntifier) => {
         itemId: item.id,
         valueToUpdate: valueToUpdate
       })
-      const responseData = await sendRequest(
+      await sendRequest(
         `/item-check-uncheck`,
         'PATCH',
         {

@@ -1,5 +1,5 @@
-import React, { useState, useReducer, useRef } from 'react'
-import { useLocation, useHistory } from 'react-router-dom'
+import React from 'react'
+import { useLocation } from 'react-router-dom'
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
 
@@ -17,9 +17,7 @@ import './ListView.css'
 const ListView = () => {
   const location = useLocation()
   const { data } = location.state
-  const history = useHistory()
   const {
-    dispatchListData,
     handleListColorChange,
     handleAddItemToList,
     handleDeleteList,
