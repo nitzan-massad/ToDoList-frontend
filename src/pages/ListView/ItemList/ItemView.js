@@ -5,7 +5,7 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemText from '@mui/material/ListItemText'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
 import Checkbox from '@mui/material/Checkbox'
-import Avatar from '@mui/material/Avatar'
+import ViewStreamIcon from '@mui/icons-material/ViewStream'
 
 const ItemView = props => {
   return (
@@ -17,7 +17,7 @@ const ItemView = props => {
         {props.itemList?.map(item => {
           return (
             <ListItem
-              key={item.id}
+              key={item?.id}
               secondaryAction={
                 <Checkbox
                   edge='end'
@@ -31,10 +31,7 @@ const ItemView = props => {
             >
               <ListItemButton>
                 <ListItemAvatar>
-                  <Avatar
-                    alt={`Avatar n°${item + 1}`}
-                    src={`/static/images/avatar/${item + 1}.jpg`}
-                  />
+                  <ViewStreamIcon />
                 </ListItemAvatar>
                 <ListItemText primary={`${item.itemTitle}`} />
               </ListItemButton>

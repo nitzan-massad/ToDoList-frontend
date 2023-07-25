@@ -10,6 +10,11 @@ const itemListReducer = (state, action) => {
         ...state,
         items: [action.newItem].concat(state.items)
       }
+    case 'SET_ITEMS':
+      return {
+        ...state,
+        items: action.itemsData
+      }
     case 'CHECK-UNCHECK-ITEM':
       const itemsToUpdate = state.items
       const currentIndex2 = itemsToUpdate.findIndex(
@@ -24,24 +29,37 @@ const itemListReducer = (state, action) => {
       throw new Error()
   }
 }
-const sortItems = (a, b)=>{
-  if (!a.isDone && !b.isDone){ return (new Date(b.creationDate) - new Date(a.creationDate))}
-  else if(a.isDone && !b.isDone){return 1}
-  else if(!a.isDone && b.isDone){return -1}
-  else if(a.isDone && b.isDone){return (new Date(b.completedDate) - new Date(a.completedDate))}
+const sortItems = (a, b) => {
+  if (!a.isDone && !b.isDone) {
+    return new Date(b.creationDate) - new Date(a.creationDate)
+  } else if (a.isDone && !b.isDone) {
+    return 1
+  } else if (!a.isDone && b.isDone) {
+    return -1
+  } else if (a.isDone && b.isDone) {
+    return new Date(b.completedDate) - new Date(a.completedDate)
+  }
 }
-export const useItemView = (color, items,listIdntifier) => {
+export const useItemView = (color, itemsData, listIdntifier) => {
   const [listColor, setListColor] = useState(color)
-  const [listId] = useState(listIdntifier)
+  const [listId, setListIdntifier] = useState(listIdntifier)
   const { isLoading, error, sendRequest, clearError } = useHtppClient()
   const [showConfirmModal, setShowConfirmModal] = useState(false)
   const history = useHistory()
   const addNewItemTextRef = useRef('')
   const [listData, dispatchListData] = useReducer(itemListReducer, {
-    items: items?.sort(sortItems)
+    items: itemsData?.sort(sortItems)
   })
 
-  const handleListColorChange = async (newColor) => {
+  if (listIdntifier !== listId) {
+    dispatchListData({
+      type: 'SET_ITEMS',
+      itemsData: itemsData
+    })
+    setListIdntifier(listIdntifier)
+    setListColor(color)
+  }
+  const handleListColorChange = async newColor => {
     setListColor(newColor)
     try {
       await sendRequest(

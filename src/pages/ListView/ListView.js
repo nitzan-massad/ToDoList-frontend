@@ -31,11 +31,8 @@ const ListView = () => {
     error,
     showConfirmModal,
     addNewItemTextRef
-  } = useItemView(data.listColor, data.items, data?.listId)
+  } = useItemView(data.listColor, data?.items, data?.listId)
 
-  if (listColor !== data.listColor) {
-    setListColor(data.listColor)
-  }
 
   const showDeleteWarningHandler = () => {
     setShowConfirmModal(true)

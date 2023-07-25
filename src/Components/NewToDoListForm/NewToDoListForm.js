@@ -50,7 +50,8 @@ const NewToDoListForm = props => {
       const data = {
         listTitle: responseData.createdList.listTitle,
         listColor: responseData.createdList.color,
-        listId: responseData.createdList._id
+        listId: responseData.createdList._id,
+        items:[]
       }
       props.closeNewToDoListModal()
       history.push({
