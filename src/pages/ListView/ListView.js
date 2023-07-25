@@ -24,7 +24,6 @@ const ListView = () => {
     clearError,
     handleItemCheckOrUncheck,
     setShowConfirmModal,
-    setListColor,
     listData,
     listColor,
     isLoading,
