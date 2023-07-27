@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
+import { sortItems } from '../../shared/hooks/ItemView-hook'
 
 import './ToDoList.css'
 
@@ -14,31 +15,7 @@ const ToDoList = props => {
     items: props?.listData?.items
   }
 
-  /* return (
-    <Link
-      to={{
-        pathname: '/showList',
-        state: { data }
-      }}
-      style={{ textDecoration: 'none' }}
-      className='to-to-list__link'
-    >
-      <div
-        style={{ backgroundColor: props.listData.color }}
-        className='toDoListBorder'
-      >
-        <h3>{JSON.stringify(props.listData?.listTitle)}</h3>
-        <div style={{ flexDirection: 'row' }} className='flexbox-container'>
-          {props.listData.items.map(item => (
-            <li key={item.itemId} className='horizontal-list '>
-              <ItemInList item={item} />
-            </li>
-          ))}
-        </div>
-      </div>
-    </Link>
-  )
-*/
+  props.listData.items.sort(sortItems)
   return (
     <Link
       to={{
@@ -57,9 +34,15 @@ const ToDoList = props => {
           <Typography variant='h5' component='div'>
             {props.listData?.listTitle}
           </Typography>
-          {props.listData.items.map(item => (
-            <Typography variant='body2'>{item.itemTitle}</Typography>
-          ))}
+          {props.listData.items.map(item =>
+            item.isDone ? (
+              <Typography variant='body2'>
+                <strike>{item.itemTitle}</strike>
+              </Typography>
+            ) : (
+              <Typography variant='body2'>{item.itemTitle}</Typography>
+            )
+          )}
         </CardContent>
       </Card>
     </Link>

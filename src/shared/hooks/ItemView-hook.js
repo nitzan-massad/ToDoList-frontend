@@ -29,7 +29,7 @@ const itemListReducer = (state, action) => {
       throw new Error()
   }
 }
-const sortItems = (a, b) => {
+export const sortItems = (a, b) => {
   if (!a.isDone && !b.isDone) {
     return new Date(b.creationDate) - new Date(a.creationDate)
   } else if (a.isDone && !b.isDone) {
