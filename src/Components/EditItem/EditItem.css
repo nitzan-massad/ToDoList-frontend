@@ -1,0 +1,16 @@
+.fotter-edit-item-bts{
+    position: absolute;
+    bottom: 5% ;
+    left: initial;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-item-delete-button{
+    position: absolute;
+    right: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

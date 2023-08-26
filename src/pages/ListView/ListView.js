@@ -24,6 +24,8 @@ const ListView = () => {
     clearError,
     handleItemCheckOrUncheck,
     setShowConfirmModal,
+    handleItemModify,
+    handleItemDelete,
     listData,
     listColor,
     isLoading,
@@ -79,6 +81,8 @@ const ListView = () => {
         <ItemView
           itemList={listData.items}
           handleCheckUncheck={handleItemCheckOrUncheck}
+          handleItemModify={handleItemModify}
+          handleItemDelete={handleItemDelete}
         />
       </div>
     </React.Fragment>

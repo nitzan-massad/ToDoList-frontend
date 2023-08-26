@@ -20,10 +20,33 @@ const itemListReducer = (state, action) => {
       const currentIndex2 = itemsToUpdate.findIndex(
         item => item.id === action.itemId
       )
-      itemsToUpdate[currentIndex2].isDone = action.valueToUpdate
+      if (currentIndex2 >-1)
+        itemsToUpdate[currentIndex2].isDone = action.valueToUpdate
       return {
         ...state,
         items: itemsToUpdate.sort(sortItems)
+      }
+    case 'MODIFY_ITEM':
+      const itemsToModify = state.items
+      const currentIndex = itemsToModify.findIndex(
+        item => item.id === action.itemId
+      )
+      if (currentIndex >-1)
+        itemsToModify[currentIndex].itemTitle = action.item.itemTitle
+      return {
+        ...state,
+        items: itemsToModify.sort(sortItems)
+      }
+    case 'DELETE_ITEM':
+      const itemsToDeleteFrom = state.items
+      const currentIndex3 = itemsToDeleteFrom.findIndex(
+        item => item.id === action.itemId
+      )
+      if (currentIndex3 >-1)
+        itemsToDeleteFrom.splice(currentIndex3, 1)
+      return {
+          ...state,
+          items: itemsToDeleteFrom.sort(sortItems)
       }
     default:
       throw new Error()
@@ -125,6 +148,20 @@ export const useItemView = (color, itemsData, listIdntifier) => {
       )
     } catch (err) {}
   }
+  const handleItemModify = async item => {
+      dispatchListData({
+        type: 'MODIFY_ITEM',
+        itemId: item._id,
+        item: item
+      })   
+  }
+  const handleItemDelete = async item => {
+      dispatchListData({
+        type: 'DELETE_ITEM',
+        itemId: item._id,
+        item: item
+      })   
+  }
 
   return {
     dispatchListData,
@@ -135,6 +172,8 @@ export const useItemView = (color, itemsData, listIdntifier) => {
     handleItemCheckOrUncheck,
     setShowConfirmModal,
     setListColor,
+    handleItemModify,
+    handleItemDelete,
     listData,
     listColor,
     isLoading,
