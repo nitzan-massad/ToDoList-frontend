@@ -8,6 +8,7 @@ import { useHtppClient } from '../../shared/hooks/http-hook'
 const ShowAllLists = props => {
   const { isLoading, error, sendRequest, clearError } = useHtppClient()
   const [loadedLists, setLoadedLists] = useState([])
+  const [contributorOnLists, setContributorOnLists] = useState([])
 
   useEffect(() => {
     const fetchUserLists = async () => {
@@ -16,6 +17,7 @@ const ShowAllLists = props => {
           'Content-Type': 'application/json'
         })
         setLoadedLists(responseData.lists)
+        setContributorOnLists(responseData.contributorOn)
       } catch (err) {
         console.log(err)
       }
@@ -29,9 +31,15 @@ const ShowAllLists = props => {
       <ErrorModal error={error} onClear={clearError} />
       <ul>
         {isLoading && <LoadingSpinner asOverlay />}
-        {loadedLists.map(list => (
-          <ToDoList key={list.id} listData={list} />
-        ))}
+        {loadedLists.map(list => {
+          return <ToDoList key={list.id} listData={list} />
+        })}
+      </ul>
+      <ul>
+        {isLoading && <LoadingSpinner asOverlay />}
+        {contributorOnLists.map(list => {
+          return <ToDoList key={list.id} listData={list} contributorOnIcon={true}/>
+        })}
       </ul>
     </React.Fragment>
   )

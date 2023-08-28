@@ -4,6 +4,8 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import { sortItems } from '../../shared/hooks/ItemView-hook'
+import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople'
+import Tooltip from '@mui/material/Tooltip'
 
 import './ToDoList.css'
 
@@ -28,6 +30,7 @@ const ToDoList = props => {
       <Card
         variant='outlined'
         sx={{ minWidth: 275, maxWidth: '88%', height: 150, marginBottom: '3%' }}
+        className='list-card-style'
         style={{ backgroundColor: props.listData.color }}
       >
         <CardContent>
@@ -44,6 +47,11 @@ const ToDoList = props => {
             )
           )}
         </CardContent>
+        {props.contributorOnIcon ? (
+          <Tooltip title='You have been asked to contribut on this list'>
+            <EmojiPeopleIcon className='contributor-on-icon' />
+          </Tooltip>
+        ) : null}
       </Card>
     </Link>
   )
