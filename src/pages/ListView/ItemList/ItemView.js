@@ -10,6 +10,7 @@ import Modal from '@mui/material/Modal'
 import EditItem from '../../../Components/EditItem/EditItem'
 import Box from '@mui/material/Box'
 import useMediaQuery from '@mui/material/useMediaQuery'
+import ModalVersionTwo from '../../../Components/Modal/ModalVersionTwo/ModalVersionTwo'
 
 const ItemView = props => {
   const [open, setOpen] = React.useState(false)
@@ -17,38 +18,19 @@ const ItemView = props => {
   const matches = useMediaQuery('(min-width: 768px)')
   return (
     <React.Fragment>
-      <Modal
+      <ModalVersionTwo
         open={open}
         onClose={() => {
           setOpen(false)
         }}
-        aria-labelledby='child-modal-title'
-        aria-describedby='child-modal-description'
       >
-        <Box
-          sx={{
-            pt: 2,
-            px: 4,
-            pb: 3,
-            boxShadow: 24,
-            border: '2px solid #000',
-            bgcolor: 'background.paper',
-            width: matches ? '30%' : '75%',
-            height: matches ? '30%' : '35%',
-            transform: 'translate(-50%, -50%)',
-            left: '50%',
-            top: '50%',
-            position: 'absolute'
-          }}
-        >
-          <EditItem
-            item={modalItem}
-            handleItemModify={props.handleItemModify}
-            handleItemDelete={props.handleItemDelete}
-            closeModal={() => setOpen(false)}
-          />
-        </Box>
-      </Modal>
+        <EditItem
+          item={modalItem}
+          handleItemModify={props.handleItemModify}
+          handleItemDelete={props.handleItemDelete}
+          closeModal={() => setOpen(false)}
+        />
+      </ModalVersionTwo>
       <div className='list-of-items-inside-listview__div'>
         <List
           dense
