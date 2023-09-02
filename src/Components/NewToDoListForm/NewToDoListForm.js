@@ -38,7 +38,7 @@ const NewToDoListForm = props => {
     event.preventDefault()
     try {
       const responseData = await sendRequest(
-        '/add-list-to-user',
+        '/list/add-list-to-user',
         'POST',
         {
           listTitle: formState.inputs.listTitle.value,

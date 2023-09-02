@@ -1,29 +1,42 @@
-.delete-btn__list-view{
+.delete-btn__list-view {
+  position: absolute;
+  right: 0;
+  transform: translateY(-50%);
+  margin-right: 4%;
+  margin-top: 4%;
+  display: flex;
+  justify-content: center;
+}
+.list-view-list-content-div {
     position: absolute;
-    right: 0;
-    transform: translateY(-50%);
-    margin-right: 4%;
-    margin-top: 4%;
-    display: flex;
-    justify-content: center;
-
-}
-.list-view-top-bar__div{
-    padding: 0 15px;
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
-    align-items: center;
-}
-.list-view-list-name__h1{
-    text-align: -webkit-center;
-    font-weight: bold;
-    
-}
-.list-of-items-inside-listview__div{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     width: 100%;
+    right: 0;
+    top: 10%;
+}
+
+.list-view-main-div {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  display: grid;
+  gap: 0px;
+  grid-template-columns: 1fr auto;
+}
+.list-view-top-bar__div {
+  padding: 0 15px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+}
+.list-view-list-name__h1 {
+  text-align: -webkit-center;
+  font-weight: bold;
+}
+.list-of-items-inside-listview__div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }

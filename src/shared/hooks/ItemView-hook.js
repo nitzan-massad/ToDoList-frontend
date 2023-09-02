@@ -5,7 +5,6 @@ import { useHtppClient } from './http-hook'
 const itemListReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_ITEM':
-      console.log('hadas is the queen:' + JSON.stringify(action.newItem))
       return {
         ...state,
         items: [action.newItem].concat(state.items)
@@ -86,7 +85,7 @@ export const useItemView = (color, itemsData, listIdntifier) => {
     setListColor(newColor)
     try {
       await sendRequest(
-        `/update-list-color/${listId}`,
+        `/list/update-list-color/${listId}`,
         'PATCH',
         {
           color: newColor
@@ -100,7 +99,7 @@ export const useItemView = (color, itemsData, listIdntifier) => {
   const handleDeleteList = async () => {
     setShowConfirmModal(false)
     try {
-      await sendRequest(`/delete-list/${listId}`, 'DELETE')
+      await sendRequest(`/list/delete-list/${listId}`, 'DELETE')
       history.push('/')
     } catch (err) {}
   }
@@ -108,7 +107,7 @@ export const useItemView = (color, itemsData, listIdntifier) => {
   const handleAddItemToList = async () => {
     try {
       const responseData = await sendRequest(
-        `/add-item-to-list`,
+        `/list/add-item-to-list`,
         'POST',
         {
           itemTitle: addNewItemTextRef.current.value,
@@ -127,15 +126,15 @@ export const useItemView = (color, itemsData, listIdntifier) => {
   }
 
   const handleItemCheckOrUncheck = async item => {
+    const valueToUpdate = !item.isDone
+    dispatchListData({
+      type: 'CHECK-UNCHECK-ITEM',
+      itemId: item.id,
+      valueToUpdate: valueToUpdate
+    })
     try {
-      const valueToUpdate = !item.isDone
-      dispatchListData({
-        type: 'CHECK-UNCHECK-ITEM',
-        itemId: item.id,
-        valueToUpdate: valueToUpdate
-      })
       await sendRequest(
-        `/item-check-uncheck`,
+        `/item/item-check-uncheck`,
         'PATCH',
         {
           itemId: item.id,
@@ -146,7 +145,13 @@ export const useItemView = (color, itemsData, listIdntifier) => {
         },
         false
       )
-    } catch (err) {}
+    } catch (err) {
+      dispatchListData({
+        type: 'CHECK-UNCHECK-ITEM',
+        itemId: item.id,
+        valueToUpdate: !valueToUpdate
+      })
+    }
   }
   const handleItemModify = async item => {
       dispatchListData({

@@ -16,7 +16,7 @@ const EditItem = props => {
   const handleEditItemTitle = async () => {
     try {
       const newItem = await sendRequest(
-        `/edit-item-title`,
+        `/item/edit-item-title`,
         'PATCH',
         {
           itemId: props?.item.id,
@@ -27,21 +27,25 @@ const EditItem = props => {
         },
         false
       )
-      console.log('roni: ' + JSON.stringify(newItem))
       props.handleItemModify(newItem.itemResponse)
       props?.closeModal()
     } catch (err) {}
   }
   const handleDeleteItem = async () => {
     try {
-      await sendRequest(`/delete-item/${props?.item.id}`, 'DELETE')
+      await sendRequest(`/item/delete-item/${props?.item.id}`, 'DELETE')
+      props.handleItemDelete(props?.item)
+      props?.closeModal()
     } catch (err) {}
-    props.handleItemDelete(props?.item)
-    props?.closeModal()
   }
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 13) { // Check if Enter key is pressed (key code 13)
+      e.preventDefault(); // Prevent the default form submission behavior
+      handleEditItemTitle();
+    }
+  };
 
-  const a = new  Date(props?.item.creationDate)
-  console.log('a: '+JSON.stringify(a))
+
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
@@ -53,6 +57,7 @@ const EditItem = props => {
           defaultValue={props?.item.itemTitle}
           helperText='You can change the item name here'
           onChange={e => setNewItemTitle(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
         <div className='edit-item-delete-button'>
           <IconButton aria-label='delete' onClick={handleDeleteItem}>
@@ -63,7 +68,7 @@ const EditItem = props => {
       <Stack direction='column' spacing={-1}>
         <p id='child-modal-description'>
           {'Creation Date: '}
-          <span style={{ fontWeight: 'bold' }}>{a.toDateString()}</span>
+          <span style={{ fontWeight: 'bold' }}>{new  Date(props?.item.creationDate).toDateString()}</span>
         </p>
         <p id='child-modal-description'>
           {'Completed: '}
