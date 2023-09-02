@@ -1,0 +1,13 @@
+.menu-item-icon{
+    margin-left: 45%;
+}
+.list-view-menu{
+    display: flex;
+    flex-direction: row-reverse;
+}
+.list-item-color-circle{
+    border: 1px;
+    border-style: solid;
+    border-radius: 15px;
+    border-color: black;
+}
