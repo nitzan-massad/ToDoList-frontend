@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import TextField from '@mui/material/TextField'
 import Stack from '@mui/material/Stack'
 import IconButton from '@mui/material/IconButton'
@@ -7,6 +7,7 @@ import AddShoppingCartIcon from '@mui/icons-material/Send'
 import './AddItemBox.css'
 
 export default function AddItemBox (props) {
+  const [dirAttribute, setDirAttribute ] = useState('ltr') 
 
   const handleKeyDown = (e) => {
     if (e.keyCode === 13) { // Check if Enter key is pressed (key code 13)
@@ -14,7 +15,15 @@ export default function AddItemBox (props) {
       props.HandleAddItem();
     }
   };
-
+  function isHebrewInput(text) {
+    // Regular expression to match Hebrew characters
+    const hebrewPattern = /[\u0590-\u05FF]/;
+    return hebrewPattern.test(text);
+  }
+  const handleInputChange = (e) => {
+    const newText = e.target.value;
+    setDirAttribute(isHebrewInput(newText)? 'rtl' : 'ltr' );
+  }
   return (
     <div className='main-div-Add-item-box__div'>
       <form>
@@ -25,6 +34,8 @@ export default function AddItemBox (props) {
             id='insertNewItem'
             inputRef={props.textRef}
             onKeyDown={handleKeyDown}
+            dir={dirAttribute}
+            onChange={handleInputChange}
           />
           <IconButton
           size='large'
