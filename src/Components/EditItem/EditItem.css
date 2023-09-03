@@ -1,6 +1,7 @@
-.fotter-edit-item-bts{
-    position: absolute;
-    bottom: 5% ;
+.footer-edit-item-bts{
+    position: fixed;
+    bottom: 5%;
+    width: 79%;
     left: initial;
     display: flex;
     justify-content: center;
@@ -9,7 +10,7 @@
 
 .edit-item-delete-button{
     position: absolute;
-    right: 3%;
+    right: 8%;
     display: flex;
     justify-content: center;
     align-items: center;

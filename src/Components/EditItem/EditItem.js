@@ -14,6 +14,10 @@ const EditItem = props => {
   const [newItemTitle, setNewItemTitle] = useState()
 
   const handleEditItemTitle = async () => {
+    if (!newItemTitle){
+      props?.closeModal()
+      return
+    }
     try {
       const newItem = await sendRequest(
         `/item/edit-item-title`,
@@ -50,7 +54,7 @@ const EditItem = props => {
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       {isLoading && <LoadingSpinner asOverlay />}
-      <Stack direction='row' spacing={2}>
+      <Stack direction='row'  style={{paddingTop: '7%'}}>
         <TextField
           label='Item Title'
           id='outlined-size-normal'
@@ -65,7 +69,7 @@ const EditItem = props => {
           </IconButton>
         </div>
       </Stack>
-      <Stack direction='column' spacing={-1}>
+      <Stack direction='column' spacing={-1} style={{paddingTop:'5%'}}>
         <p id='child-modal-description'>
           {'Creation Date: '}
           <span style={{ fontWeight: 'bold' }}>{new  Date(props?.item.creationDate).toDateString()}</span>
@@ -75,10 +79,9 @@ const EditItem = props => {
           <span style={{ fontWeight: 'bold' }}>{props?.item.isDone.toString()}</span>
         </p>
       </Stack>
-      <div className='fotter-edit-item-bts'>
+      <footer className='footer-edit-item-bts'>
         <Button onClick={handleEditItemTitle}>Change</Button>
-        <Button onClick={props?.closeModal}>Discard</Button>
-      </div>
+      </footer>
     </React.Fragment>
   )
 }
