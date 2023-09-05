@@ -14,7 +14,7 @@ const ItemView = props => {
   const [modalItem, setModalItem] = React.useState({})
 
   const handleCheckUncheck = (item) => {
-    if (navigator.vibrate && !item.isDone) {
+    if (!item.isDone) {
       navigator.vibrate(500)
     }
     props.handleCheckUncheck(item)
