@@ -12,6 +12,14 @@ import ModalVersionTwo from '../../../Components/Modal/ModalVersionTwo/ModalVers
 const ItemView = props => {
   const [open, setOpen] = React.useState(false)
   const [modalItem, setModalItem] = React.useState({})
+
+  const handleCheckUncheck = (item) => {
+    if (navigator.vibrate && !item.isDone) {
+      navigator.vibrate(500)
+    }
+    props.handleCheckUncheck(item)
+  }
+
   return (
     <React.Fragment>
       <ModalVersionTwo
@@ -39,9 +47,7 @@ const ItemView = props => {
                 secondaryAction={
                   <Checkbox
                     edge='end'
-                    onChange={() => {
-                      props.handleCheckUncheck(item)
-                    }}
+                    onChange={()=>handleCheckUncheck(item)}
                     checked={item.isDone}
                   />
                 }
