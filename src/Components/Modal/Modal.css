@@ -13,6 +13,8 @@
   padding: 1rem 0.5rem;
   background: #2a006e;
   color: white;
+  display: flex;
+  justify-content: space-between;
 }
 
 .modal__header h2 {

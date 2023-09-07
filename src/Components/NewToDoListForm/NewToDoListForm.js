@@ -75,9 +75,6 @@ const NewToDoListForm = props => {
             <Button type='submit' disabled={!formState.isValid}>
               Create
             </Button>
-            <Button type='button' onClick={props.closeNewToDoListModal}>
-              Close
-            </Button>
           </div>
         }
         onSubmit={handleSubmitNewList}
