@@ -6,7 +6,7 @@ import Button from '../../Components/FormElements/Button'
 import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner'
 import ErrorModal from '../../Components/ErrorModal/ErrorModal'
 import Modal from '../../Components/Modal/Modal'
-import ItemView from './ItemList/ItemView'
+import ItemsView from './ItemList/ItemsView'
 import AddItemBox from './AddItemBox/AddItemBox'
 import { useItemView } from '../../shared/hooks/ItemView-hook'
 import ListViewMenu from './ListViewMenu/ListViewMenu'
@@ -27,6 +27,7 @@ const ListView = () => {
     setShowConfirmModal,
     handleItemModify,
     handleItemDelete,
+    handlePositionChange,
     listData,
     listColor,
     isLoading,
@@ -83,11 +84,12 @@ const ListView = () => {
               textRef={addNewItemTextRef}
             />
           </div>
-          <ItemView
+          <ItemsView
             itemList={listData.items}
             handleCheckUncheck={handleItemCheckOrUncheck}
             handleItemModify={handleItemModify}
             handleItemDelete={handleItemDelete}
+            handlePositionChange={handlePositionChange}
           />
         </div>
         <ListViewMenu

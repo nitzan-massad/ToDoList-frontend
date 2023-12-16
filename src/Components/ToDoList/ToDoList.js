@@ -26,30 +26,32 @@ const ToDoList = props => {
       }}
       style={{ textDecoration: 'none' }}
       className='to-to-list__link'
+      key={data.listId}
     >
       <Card
         variant='outlined'
         sx={{ minWidth: 275, maxWidth: '88%', height: 150, marginBottom: '3%' }}
         className='list-card-style'
         style={{ backgroundColor: props.listData.color }}
+        key={data.listId}
       >
-        <CardContent>
-          <Typography variant='h5' component='div'>
+        <CardContent key={data.listId}>
+          <Typography variant='h5' component='div' key={data.listId}>
             {props.listData?.listTitle}
           </Typography>
-          {props.listData.items.map(item =>
+          {props.listData.items.map((item,index) =>
             item.isDone ? (
-              <Typography variant='body2'>
+              <Typography variant='body2' key={index}>
                 <strike>{item.itemTitle}</strike>
               </Typography>
             ) : (
-              <Typography variant='body2'>{item.itemTitle}</Typography>
+              <Typography variant='body2' key={index}>{item.itemTitle}</Typography>
             )
           )}
         </CardContent>
         {props.contributorOnIcon ? (
-          <Tooltip title='You have been asked to contribut on this list'>
-            <EmojiPeopleIcon className='contributor-on-icon' />
+          <Tooltip title='You have been asked to contribut on this list' key={data.listId}>
+            <EmojiPeopleIcon className='contributor-on-icon' key={data.listId}/>
           </Tooltip>
         ) : null}
       </Card>

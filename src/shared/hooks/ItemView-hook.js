@@ -16,11 +16,8 @@ const itemListReducer = (state, action) => {
       }
     case 'CHECK-UNCHECK-ITEM':
       const itemsToUpdate = state.items
-      const currentIndex2 = itemsToUpdate.findIndex(
-        item => item.id === action.itemId
-      )
-      if (currentIndex2 >-1)
-        itemsToUpdate[currentIndex2].isDone = action.valueToUpdate
+      const itemIndex = state.items.findIndex(item => item.id === action.itemId)
+      if (itemIndex > -1) itemsToUpdate[itemIndex].isDone = action.valueToUpdate
       return {
         ...state,
         items: itemsToUpdate.sort(sortItems)
@@ -30,38 +27,35 @@ const itemListReducer = (state, action) => {
       const currentIndex = itemsToModify.findIndex(
         item => item.id === action.itemId
       )
-      if (currentIndex >-1)
+      if (currentIndex > -1)
         itemsToModify[currentIndex].itemTitle = action.item.itemTitle
       return {
         ...state,
         items: itemsToModify.sort(sortItems)
       }
     case 'DELETE_ITEM':
-      const itemsToDeleteFrom = state.items
-      const currentIndex3 = itemsToDeleteFrom.findIndex(
+      const itemToDeleteIndex = state.items.findIndex(
         item => item.id === action.itemId
       )
-      if (currentIndex3 >-1)
-        itemsToDeleteFrom.splice(currentIndex3, 1)
+      if (itemToDeleteIndex > -1) state.items.splice(itemToDeleteIndex, 1)
       return {
-          ...state,
-          items: itemsToDeleteFrom.sort(sortItems)
+        ...state,
+        items: state.items.sort(sortItems)
       }
     default:
       throw new Error()
   }
 }
 export const sortItems = (a, b) => {
-  if (!a.isDone && !b.isDone) {
-    return new Date(b.creationDate) - new Date(a.creationDate)
-  } else if (a.isDone && !b.isDone) {
+  if (a.isDone && !b.isDone) {
     return 1
   } else if (!a.isDone && b.isDone) {
     return -1
   } else if (a.isDone && b.isDone) {
-    return new Date(b.completedDate) - new Date(a.completedDate)
+    return 1
   }
 }
+
 export const useItemView = (color, itemsData, listIdntifier) => {
   const [listColor, setListColor] = useState(color)
   const [listId, setListIdntifier] = useState(listIdntifier)
@@ -154,18 +148,45 @@ export const useItemView = (color, itemsData, listIdntifier) => {
     }
   }
   const handleItemModify = async item => {
-      dispatchListData({
-        type: 'MODIFY_ITEM',
-        itemId: item._id,
-        item: item
-      })   
+    dispatchListData({
+      type: 'MODIFY_ITEM',
+      itemId: item._id,
+      item: item
+    })
   }
   const handleItemDelete = async item => {
-      dispatchListData({
-        type: 'DELETE_ITEM',
-        itemId: item._id,
-        item: item
-      })   
+    dispatchListData({
+      type: 'DELETE_ITEM',
+      itemId: item._id,
+      item: item
+    })
+  }
+
+  const handlePositionChange = async (itemId, startIndex, endIndex) => {
+
+    const newListOrder = Array.from(listData.items)
+    const [removed] = newListOrder.splice(startIndex, 1)
+    newListOrder.splice(endIndex, 0, removed)
+   
+    await dispatchListData({
+      type: 'SET_ITEMS',
+      itemsData: newListOrder,    
+    })
+    try {
+      const itemIndex = await sendRequest(
+        `/list/update-items-order/${listId}`,
+        'PATCH',
+        {
+          itemsId: itemId,
+          itemsPositionEnd:endIndex 
+        },
+        {
+          'Content-Type': 'application/json'
+        },
+        false
+      )
+      return itemIndex.index
+    } catch (err) {}
   }
 
   return {
@@ -179,6 +200,7 @@ export const useItemView = (color, itemsData, listIdntifier) => {
     setListColor,
     handleItemModify,
     handleItemDelete,
+    handlePositionChange,
     listData,
     listColor,
     isLoading,

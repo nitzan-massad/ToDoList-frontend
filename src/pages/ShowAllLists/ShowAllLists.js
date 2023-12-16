@@ -48,9 +48,7 @@ const ShowAllLists = props => {
       <ul>
         {isLoading && <LoadingSpinner asOverlay />}
         {contributorOnLists.map(list => {
-          return (
-            <ToDoList key={list.id} listData={list} contributorOnIcon={true} />
-          )
+          return (<ToDoList key={list.id} listData={list} contributorOnIcon={true} />)
         })}
       </ul>
       {dontHaveAnyLists && (
