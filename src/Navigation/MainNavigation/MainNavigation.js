@@ -1,32 +1,32 @@
-import React, { useState, useContext } from 'react'
-import { Link } from 'react-router-dom'
-import MenuIcon from '@mui/icons-material/Menu'
-import Drawer from '@mui/material/Drawer'
+import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import MenuIcon from '@mui/icons-material/Menu';
+import Drawer from '@mui/material/Drawer';
 
-import MainHeader from '../MainHeader/MainHeader'
-import './MainNavigation.css'
-import NewToDoListForm from '../../Components/NewToDoListForm/NewToDoListForm'
-import NavLinksSideDrwar from '../NavLinksSideDrawer/NavLinksSideDrawer'
+import MainHeader from '../MainHeader/MainHeader';
+import './MainNavigation.css';
+import NewToDoListForm from '../../Components/NewToDoListForm/NewToDoListForm';
+import NavLinksSideDrwar from '../NavLinksSideDrawer/NavLinksSideDrawer';
 
-import { AuthContext } from '../../shared/context/AuthContext'
+import { AuthContext } from '../../shared/context/AuthContext';
 
-const MainNavigation = props => {
-  const [showNewToDoListModal, setNewToDoListModal] = useState(false)
-  const [drawerIsOpen, setDrawerIsOpen] = useState(false)
-  const auth = useContext(AuthContext)
-  const openNewToDoListModal = () => setNewToDoListModal(true)
-  const closeNewToDoListModal = () => setNewToDoListModal(false)
+const MainNavigation = (props) => {
+  const [showNewToDoListModal, setNewToDoListModal] = useState(false);
+  const [drawerIsOpen, setDrawerIsOpen] = useState(false);
+  const auth = useContext(AuthContext);
+  const openNewToDoListModal = () => setNewToDoListModal(true);
+  const closeNewToDoListModal = () => setNewToDoListModal(false);
 
-  const toggleDrawer = open => event => {
+  const toggleDrawer = (open) => (event) => {
     if (
       event.type === 'keydown' &&
       (event.key === 'Tab' || event.key === 'Shift')
     ) {
-      return
+      return;
     }
 
-    setDrawerIsOpen(open)
-  }
+    setDrawerIsOpen(open);
+  };
 
   return (
     <React.Fragment>
@@ -38,14 +38,16 @@ const MainNavigation = props => {
         <NavLinksSideDrwar toggleDrawer={toggleDrawer} />
       </Drawer>
       <MainHeader>
-        <button
-          className='main-navigation__menu-btn'
-          onClick={() => setDrawerIsOpen(true)}
-        >
-          <MenuIcon fontSize='large' />
-        </button>
+        {auth.isLoggedIn && (
+          <button
+            className='main-navigation__menu-btn'
+            onClick={() => setDrawerIsOpen(true)}
+          >
+            <MenuIcon fontSize='large' />
+          </button>
+        )}
         <h1 className='main-navigation__title'>
-          <Link to='/'>To Do List </Link>
+          <Link to='/'>Lists </Link>
         </h1>
         {auth.isLoggedIn && (
           <button
@@ -57,7 +59,7 @@ const MainNavigation = props => {
         )}
       </MainHeader>
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default MainNavigation
+export default MainNavigation;

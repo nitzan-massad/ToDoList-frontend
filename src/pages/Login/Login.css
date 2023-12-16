@@ -1,26 +1,32 @@
 .authentication__header {
-    color: white;
-    text-align: center;
-  }
-  
-  .authentication {
-    width: 90%;
-    max-width: 25rem;
-    margin: 7rem auto;
-    text-align: center;
-  }
-  
-  .authentication form {
-    margin-bottom: 1rem;
-    width: 100%;
-  }
-  .switch-login-signup__btn{
-    margin-top: 7%;
-    background-color: transparent;
-    border-radius: 5cm;
-  }
-  .login-last-name-first-name__div{
-    display: flex;
-    justify-content: space-between;
-  }
+  color: white;
+  text-align: center;
+}
 
+.authentication {
+  width: 90%;
+  max-width: 25rem;
+  margin: 7rem auto;
+  text-align: center;
+}
+
+.authentication form {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+.switch-login-signup__btn {
+  padding: 15px;
+  background-color: #254e70;
+  border-radius: 25px;
+  color: white;
+  cursor: pointer;
+}
+
+.switch-login-signup__btn:active {
+  background-color: rgb(37, 78, 200);
+}
+
+.login-last-name-first-name__div {
+  display: flex;
+  justify-content: space-between;
+}
