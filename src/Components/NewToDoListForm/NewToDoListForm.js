@@ -22,14 +22,6 @@ const NewToDoListForm = props => {
         value: '',
         isValid: false
       },
-      firstItem: {
-        value: '',
-        isValid: true
-      },
-      color: {
-        value: 'None',
-        isValid: true
-      }
     },
     false
   )
@@ -88,7 +80,7 @@ const NewToDoListForm = props => {
               type='text'
               label='List Title'
               validators={[VALIDATOR_REQUIRE()]}
-              errorText='Please enter a valid email address.'
+              errorText='Please enter a valid list title.'
               onInput={inputHandler}
               class='list-name__input'
             />
