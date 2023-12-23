@@ -99,12 +99,18 @@ export const useItemView = (color, itemsData, listIdntifier) => {
   }
 
   const handleAddItemToList = async () => {
+    if  (!addNewItemTextRef.current.value){
+      //if the new item text block is empty - don't do anything
+      return
+    }
+    const newItem =  addNewItemTextRef.current.value
+    addNewItemTextRef.current.value = ''
     try {
       const responseData = await sendRequest(
         `/list/add-item-to-list`,
         'POST',
         {
-          itemTitle: addNewItemTextRef.current.value,
+          itemTitle: newItem,
           listId: listId
         },
         {
@@ -115,7 +121,6 @@ export const useItemView = (color, itemsData, listIdntifier) => {
         type: 'ADD_ITEM',
         newItem: responseData.newItemResponse
       })
-      addNewItemTextRef.current.value = ''
     } catch (err) {}
   }
 
