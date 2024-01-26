@@ -55,7 +55,7 @@ const ItemsView = props => {
             <Droppable droppableId='list'>
               {provided => (
                 <React.Fragment>
-                <ul ref={provided.innerRef} {...provided.droppableProps}>
+                <ul className='ul-list-warpper' ref={provided.innerRef} {...provided.droppableProps}>
                   {props.itemList.map((item, index) => {
                     return (
                       <Draggable
