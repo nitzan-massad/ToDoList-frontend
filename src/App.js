@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, } from 'react'
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 
 import { AuthContext } from './shared/context/AuthContext'
@@ -12,14 +12,12 @@ const Login = React.lazy(() => import('./pages/Login/Login'))
 const Fotter = React.lazy(() => import('./Navigation/Fotter/Fotter'))
 const ListView = React.lazy(() => import('./pages/ListView/ListView'))
 
-
-
 function App () {
   const { token, login, logout, userDetails } = useAuth()
 
   let routes
 
-  if (token) {
+  if (token && token !== 'logOut') {
     routes = (
       <Switch>
         <Route path='/' exact>
@@ -39,7 +37,6 @@ function App () {
       </Switch>
     )
   }
-
   return (
     <AuthContext.Provider
       value={{
@@ -54,7 +51,11 @@ function App () {
     >
       <BrowserRouter>
         <MainNavigation />
-        <main><Suspense fallback={<div className='center' ><LoadingSpinner/></div>}>{routes}</Suspense></main>
+        <main>
+          <Suspense fallback={<LoadingSpinner />}>
+            {token ? routes : <LoadingSpinner />}
+          </Suspense>
+        </main>
         <Fotter />
       </BrowserRouter>
     </AuthContext.Provider>

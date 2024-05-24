@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import React, { useState,useEffect } from 'react'
+import { useLocation, useHistory } from 'react-router-dom'
+import TextField from '@mui/material/TextField'
 
 import ColorPicker from '../../Components/ColorPicker/ColorPicker'
 import Button from '../../Components/FormElements/Button'
@@ -16,8 +17,19 @@ import './ListView.css'
 
 const ListView = () => {
   const location = useLocation()
-  const { data } = location.state
+  const history = useHistory()
+
+  useEffect(() => {
+    if (!location.state || !location.state.data) {
+      history.push('/')
+    }
+  }, [location, history])
+
+  const { data } = location?.state || {}
   const [openColorPickerModal, setOpenColorPickerModal] = useState(false)
+  const [openSharePickerModal, setOpenSharePickerModal] = useState(false)
+  
+
   const {
     handleListColorChange,
     handleAddItemToList,
@@ -34,7 +46,7 @@ const ListView = () => {
     error,
     showConfirmModal,
     addNewItemTextRef
-  } = useItemView(data.listColor, data?.items, data?.listId)
+  } = useItemView(data?.listColor , data?.items || [], data?.listId)
 
   const showDeleteWarningHandler = () => {
     setShowConfirmModal(true)
@@ -42,6 +54,12 @@ const ListView = () => {
 
   const cancelDeleteHandler = () => {
     setShowConfirmModal(false)
+  }
+  function copyUrlOfListToClipBoard () {
+    var copyText = document.getElementById('share-list-textblock')
+    copyText.select()
+    copyText.setSelectionRange(0, 99999)
+    navigator.clipboard.writeText(copyText.value)
   }
 
   return (
@@ -62,6 +80,30 @@ const ListView = () => {
           </React.Fragment>
         }
       />
+      <Modal
+        show={openSharePickerModal}
+        onCancel={() => setOpenSharePickerModal(false)}
+        header='Share List'
+        footerClass='place-item__modal-actions'
+        footer={
+          <React.Fragment>
+            <Button danger onClick={copyUrlOfListToClipBoard}>
+              Copy Link
+            </Button>
+          </React.Fragment>
+        }
+      >
+        <div style={{ textAlignLast: 'center' }}>
+          <TextField
+            disabled
+            id='share-list-textblock'
+            label={data?.listTitle}
+            multiline
+            defaultValue='https://'
+            maxRows={1}
+          />
+        </div>
+      </Modal>
       <ModalVersionTwo
         open={openColorPickerModal}
         onClose={() => {
@@ -95,7 +137,10 @@ const ListView = () => {
         <ListViewMenu
           showDeleteWarningHandler={showDeleteWarningHandler}
           listColor={listColor}
-          setOpenColorPickerModal={()=>{setOpenColorPickerModal(true)}}
+          setOpenSharePickerModal={() => setOpenSharePickerModal(true)}
+          setOpenColorPickerModal={() => {
+            setOpenColorPickerModal(true)
+          }}
         />
       </div>
     </React.Fragment>
